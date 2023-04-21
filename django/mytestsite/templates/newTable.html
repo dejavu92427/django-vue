@@ -1,0 +1,29 @@
+{% for data in data %}
+    <tr>
+        <td colspan="2">{{ data.domain }}</td>
+    <tr>
+    <tr>
+        <td width="5%">dept.</td>
+        <td>
+            {% for each in data.department %}
+	    <button disabled>{{ each }}</button>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td width="5%">srv</td>
+        <td>
+            {% for each in data.service %}
+	    <button disabled>{{ each }}</button>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td width="5%">env</td>
+        <td>
+            {% for each in data.env %}
+	    <button disabled>{{ each }}</button>
+            {% endfor %}
+        </td>
+    </tr>
+{% endfor %}

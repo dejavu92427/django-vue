@@ -1,0 +1,10 @@
+/usr/bin/python3 /opt/prom/dragonball/cdn/ali_emmaophqs_7.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/ali_emmaophqs_8.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/ali_gonna3be3rich.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/greypanel.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/huawei.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/incapsula.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/tencent.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/wangsu.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/leacloud.py
+/usr/bin/python3 /opt/prom/dragonball/cdn/baishan.py

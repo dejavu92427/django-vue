@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+{% load static %}
+
+<head>
+	<title>Waaaaaagh!</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Bootstrap.">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/b-2.0.1/b-colvis-2.0.1/cr-1.5.4/fh-3.2.0/rr-1.2.8/sb-1.2.2/sl-1.3.3/datatables.min.css"/>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/b-2.0.1/b-colvis-2.0.1/cr-1.5.4/fh-3.2.0/rr-1.2.8/sb-1.2.2/sl-1.3.3/datatables.min.js"></script>
+
+	<script>
+                $(document).ready(function () {
+                        $(all).DataTable({
+				"dom": '<"top"Birt><"bottom"ipfl>',
+                                "ordering": true,
+                                "orderClasses": false,
+                                "deferRender": true,
+				"iDisplayLength": 100,
+                                colReorder: true,
+                                buttons: [
+                                        'colvis',
+                                        {
+                                                text: 'simple',
+                                                action: function ( e, dt, node, config ) {
+							window.location.replace("http://192.168.2.201:8000/show/simple/");
+                                                }
+                                        },
+					{
+                                                text: 'orphan',
+                                                action: function ( e, dt, node, config ) {
+                                                        window.location.replace("http://192.168.2.201:8000/orphan/");
+                                                }
+                                        }
+                                ],
+                                //columnDefs: [{
+                                //        orderable: false,
+                                //        className: 'select-checkbox',
+                                //        targets: 0,
+                                //        data: null,
+                                //        defaultContent: ''
+                                //}],
+                                //select: {
+                                //        style: 'multi',
+                                //        selector: 'td:first-child'
+                                //},
+                                fixedHeader: {
+                                        header: true,
+                                }
+                        });
+                });
+        </script>
+
+	<style>
+		div.dataTables_length {
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+
+		div.dataTables_information {
+			margin-top: 10px;
+			margin-left: 15px;
+		}
+
+		div.dataTables_pagination {
+			margin-top: 10px;
+			margin-right: 100px;
+		}
+
+		div.dataTables_filter {
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+
+		.select-checkbox::before {
+			top: 48% !important
+		}
+
+		table.dataTable.fixedHeader-floating {
+			position:fixed !important;
+			margin-top:160px;
+			margin-left:10px;
+		}
+
+		.select-checkbox::after {
+			top: 48% !important
+		}
+	
+		#WRAPPER {
+			postion:fixed;
+                	width: 95%;
+                        float: left;
+			margin-left: 10px;
+			margin-right: 50px;
+			margin-top: 160px;
+                }
+
+		#HEADER {
+			position:fixed;
+                        margin-left: 10px;
+			width: 100%;
+                        height: 160px;
+                        background-color: white;
+			z-index: 105;
+                }
+
+		#hideAll {
+			position: fixed;
+			left: 0px;
+			right: 0px;
+			top: 0px;
+			bottom: 0px;
+			background-color: white;
+			z-index: 999;
+			/* Higher than anything else in the document */
+		}
+
+		#loading {
+			vertical-align: middle;
+                        text-align: center;
+			position: absolute;
+			top: 45%;
+			left: 45%;
+		}
+
+		details {
+			border: 1px solid #aaa;
+			border-radius: 4px;
+			padding: .5em .5em 0;
+		}
+
+		summary {
+			font-weight: bold;
+			margin: -.5em -.5em 0;
+			padding: .5em;
+		}
+		
+		#myBtn {
+                	display: block;
+                        position: fixed; /* Fixed/sticky position */
+                        bottom: 10px; /* Place the button at the bottom of the page */
+                        right: 10px; /* Place the button 30px from the right */
+                        z-index: 2; /* Make sure it does not overlap */
+                        border: none; /* Remove borders */
+                        outline: none; /* Remove outline */
+                        background-color: grey; /* Set a background color */
+                        color: white; /* Text color */
+                        cursor: pointer; /* Add a mouse pointer on hover */
+			padding: 15px; /* Some padding */
+                        border-radius: 5px; /* Rounded corners */
+                        font-size: 15px; /* Increase font size */
+                }
+
+                #myBtn:hover {
+	                background-color: #555; /* Add a dark-grey background on hover */
+                }
+
+		button:disabled,
+                button[disabled]{
+                        margin-top: 2px;
+                        border: 1px solid #999999;
+                        background-color: #f5f5f5;
+                        color: #000000;
+                }
+	</style>
+
+	<style>
+		.led-box {
+			height: 30px;
+			width: 25%;
+			margin: 10px 0;
+			float: left;
+		}
+
+		.led-box p {
+			font-size: 12px;
+			text-align: center;
+			margin: 1em;
+		}
+
+		.led-red {
+			margin: 0 auto;
+			width: 24px;
+			height: 24px;
+			background-color: #F00;
+			border-radius: 50%;
+			box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+			-webkit-animation: blinkRed 0.5s infinite;
+			-moz-animation: blinkRed 0.5s infinite;
+			-ms-animation: blinkRed 0.5s infinite;
+			-o-animation: blinkRed 0.5s infinite;
+			animation: blinkRed 0.5s infinite;
+		}
+
+		@-webkit-keyframes blinkRed {
+			from {
+				background-color: #F00;
+			}
+
+			50% {
+				background-color: #A00;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;
+			}
+
+			to {
+				background-color: #F00;
+			}
+		}
+
+		@-moz-keyframes blinkRed {
+			from {
+				background-color: #F00;
+			}
+
+			50% {
+				background-color: #A00;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;
+			}
+
+			to {
+				background-color: #F00;
+			}
+		}
+
+		@-ms-keyframes blinkRed {
+			from {
+				background-color: #F00;
+			}
+
+			50% {
+				background-color: #A00;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;
+			}
+
+			to {
+				background-color: #F00;
+			}
+		}
+
+		@-o-keyframes blinkRed {
+			from {
+				background-color: #F00;
+			}
+
+			50% {
+				background-color: #A00;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;
+			}
+
+			to {
+				background-color: #F00;
+			}
+		}
+
+		@keyframes blinkRed {
+			from {
+				background-color: #F00;
+			}
+
+			50% {
+				background-color: #A00;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;
+			}
+
+			to {
+				background-color: #F00;
+			}
+		}
+
+		.led-yellow {
+			margin: 0 auto;
+			width: 24px;
+			height: 24px;
+			background-color: #FF0;
+			border-radius: 50%;
+			box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 12px;
+			-webkit-animation: blinkYellow 1s infinite;
+			-moz-animation: blinkYellow 1s infinite;
+			-ms-animation: blinkYellow 1s infinite;
+			-o-animation: blinkYellow 1s infinite;
+			animation: blinkYellow 1s infinite;
+		}
+
+		@-webkit-keyframes blinkYellow {
+			from {
+				background-color: #FF0;
+			}
+
+			50% {
+				background-color: #AA0;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0;
+			}
+
+			to {
+				background-color: #FF0;
+			}
+		}
+
+		@-moz-keyframes blinkYellow {
+			from {
+				background-color: #FF0;
+			}
+
+			50% {
+				background-color: #AA0;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0;
+			}
+
+			to {
+				background-color: #FF0;
+			}
+		}
+
+		@-ms-keyframes blinkYellow {
+			from {
+				background-color: #FF0;
+			}
+
+			50% {
+				background-color: #AA0;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0;
+			}
+
+			to {
+				background-color: #FF0;
+			}
+		}
+
+		@-o-keyframes blinkYellow {
+			from {
+				background-color: #FF0;
+			}
+
+			50% {
+				background-color: #AA0;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0;
+			}
+
+			to {
+				background-color: #FF0;
+			}
+		}
+
+		@keyframes blinkYellow {
+			from {
+				background-color: #FF0;
+			}
+
+			50% {
+				background-color: #AA0;
+				box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0;
+			}
+
+			to {
+				background-color: #FF0;
+			}
+		}
+
+		.led-green {
+			margin: 0 auto;
+			width: 24px;
+			height: 24px;
+			background-color: #ABFF00;
+			border-radius: 50%;
+			box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+		}
+
+		.led-grey {
+			margin: 0 auto;
+			width: 24px;
+			height: 24px;
+			background-color: #808080;
+			border-radius: 50%;
+			box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
+		}
+	</style>
+
+	<script>
+                window.onload = function () { document.getElementById("hideAll").style.display = "none"; }
+        </script>
+
+	<script>
+	        mybutton = document.getElementById("myBtn");
+
+        	function topFunction() {
+                	document.body.scrollTop = 0; // For Safari
+                	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        	}
+	</script>
+
+	<script>
+        	function openFun(event, domain, departmentList, serviceList, envList) {
+	                cursorX = event.pageX;
+                        cursorY = event.pageY;
+                        $('#myForm').css('display','block');
+                        $('#myForm').css('left', cursorX);
+                        $('#myForm').css('top', cursorY);
+                        $('#myForm').css("position", "absolute");
+                        $('#myForm').css("z-index", "99");
+                        document.getElementById("a_t_d").value = domain;
+                        document.getElementById("r_t_d").value = domain;
+			document.getElementById('c_t_d').innerHTML = '';
+                        document.getElementById('c_t_s').innerHTML = '';
+  			document.getElementById('c_t_e').innerHTML = '';
+
+                        for (var i=0;i<departmentList.length;i++){
+        	                var dep = departmentList[i];
+				var el = document.createElement("option");
+				var select = document.getElementById("c_t_d"); 
+				el.textContent = dep;
+				select.appendChild(el);
+                                console.log(dep);
+                      	}
+
+                        for (var j=0;j<serviceList.length;j++){
+        	                var ser = serviceList[j];
+                                $('#c_t_s').append('<option value="' + ser + '"></option>');
+                                console.log(ser);
+                        }
+
+			for (var k=0;k<envList.length;k++){
+                        	var env = envList[k];
+                                $('#c_t_e').append('<option value="' + env + '"></option>');
+                                console.log(env);
+                        }
+          	}
+
+                function openAuth(event, domain) {
+                	cursorX = event.pageX;
+                        cursorY = event.pageY;
+                        $('#authForm').css('display','block');
+                        $('#authForm').css('left', cursorX);
+                        $('#authForm').css('top', cursorY);
+                        $('#authForm').css("position", "absolute");
+                        $('#authForm').css("z-index", "99");
+                        document.getElementById("authDomain").value = domain;
+            	}
+
+                function closeFun() {
+                	$('#myForm').css('display','none');
+                }
+
+                function closeAuthFun() {
+			$('#authForm').css('display','none');
+                }
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if (window.location.href.indexOf("alarm=True") > -1) {
+				const details = document.querySelectorAll("details");
+				details.forEach((detail) => {
+					detail.setAttribute("open", "True");
+				});
+    			}
+  		});
+	</script>
+
+	<script type="text/javascript">
+                async function newTable(domain) {
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+
+                        var url = "http://192.168.2.201:8000/newtable/";
+                        var data = {domain:domain};
+
+                        $.ajax({
+                                url: url,
+                                type: "POST",
+                                data: JSON.stringify(data),
+                                dataType: "json",
+                                contentType: "application/json",
+                                cache: false,
+                                success: function(returnData){
+                                        document.getElementById(domain).innerHTML = returnData.newTable;
+                                }
+                        });
+                }
+        </script>
+</head>
+
+<body>
+	<div style="display: none;" id="hideAll">
+		<div id="loading">
+			<font size="5">loading...</font>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+        	document.getElementById("hideAll").style.display = "block";
+        </script>
+
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+		<div id="myForm" style="display:none; border:1px solid black; background-color:white">
+                        Add
+			<form method="post" action="/tag/add/" onSubmit="return newTable(domain.value)">
+				<input type="hidden" name="domain" id="a_t_d"/>
+                                dept.: <input type="text" name="department" list="departments" autocomplete="off"/>
+                                <datalist id="departments">
+                                        {% for department in tags.department %}
+                                                <option>{{ department }}</option>
+                                        {% endfor %}
+                                </datalist>
+				srv: <input type="text" name="service" list="services" autocomplete="off"/>
+				<datalist id="services">
+					{% for service in tags.service %}
+                                                <option>{{ service }}</option>
+                                        {% endfor %}
+				</datalist>
+				env: <input type="text" name="env" list="envs" autocomplete="off"/>
+                                <datalist id="envs">
+                                        {% for env in tags.env %}
+                                                <option>{{ env }}</option>
+                                        {% endfor %}
+                                </datalist>
+                                <input type="submit" value="add" />
+                        </form>
+
+			Remove
+                        <form method="post" action="/tag/remove/" onSubmit="return newTable(domain.value)">
+                                <input type="hidden" name="domain" id="r_t_d"/>
+                                dept.: <input type="text" name="department" list="c_t_d" autocomplete="off"/>
+                                <datalist id="c_t_d">
+				</datalist>
+				srv: <input type="text" name="service" list="c_t_s" autocomplete="off"/>
+				<datalist id="c_t_s">
+				</datalist>
+				env: <input type="text" name="env" list="c_t_e" autocomplete="off"/>
+                                <datalist id="c_t_e">
+                                </datalist>
+                                <input type="submit" value="remove" />
+                        </form>
+
+			<br>
+                        <button onclick="closeFun()" style="float:right;">close</button>
+                </div>
+
+		<div id="HEADER">
+			<form method="get" action="/show/">
+                        	<div align="left" style="float:left; margin-top:10px; display:inline-block;">
+					<div align="left" style="float:left; margin-top:2px; margin-left:10px;">
+                                        domain: <input type="text" name="domain" list="domain" autocomplete="off">
+					<datalist id="domain">
+						{% for domain in tags.domain %}
+                                                        <option>{{ domain }}</option>
+                                                {% endfor %}
+					</datalist>
+					</div>
+
+					<div align="left" style="float:left; margin-top:2px; margin-left:10px;">
+                                        resource: <input type="text" name="resource" list="resource" autocomplete="off">
+                                        <datalist id="resource">
+                                                {% for resource in tags.resource %}
+                                                        <option>{{ resource }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        dns: <select type="text" name="dns[]" list="dns" data-live-search="true" multiple>
+					<datalist id="dns">
+                                                {% for dns in tags.dns %}
+                                                        <option>{{ dns }}</option>
+                                                {% endfor %}
+                                        </datalist>
+					</select>
+					</div>
+					
+					<div align="left" style="float:left; margin-left:10px;">
+					cdn: <select type="text" name="cdn[]" list="cdn" data-live-search="true" multiple>
+                                        <datalist id="cdn">
+                                                {% for cdn in tags.cdn %}
+                                                        <option>{{ cdn }}</option>
+                                                {% endfor %}
+                                        </datalist>
+					</select>
+					</div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        dept.: <select type="text" name="department[]" list="department" data-live-search="true" multiple>
+                                        <datalist id="department">
+						<option>noTag</option>
+                                                {% for department in tags.department %}
+                                                        <option>{{ department }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        srv: <select type="text" name="service[]" list="service" data-live-search="true" multiple>
+                                        <datalist id="service">
+						<option>noTag</option>
+                                                {% for service in tags.service %}
+                                                        <option>{{ service }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        env: <select type="text" name="env[]" list="env" data-live-search="true" multiple>
+                                        <datalist id="env">
+                                                <option>noTag</option>
+                                                {% for env in tags.env %}
+                                                        <option>{{ env }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+                        	</div>
+
+				<div align="left" style="float:left; margin-top:10px; display:inline-block;">
+					<div align="left" style="float:left; margin-left:10px;">
+                                        vs: <select type="text" name="vs[]" list="vs" data-live-search="true" multiple>
+                                        <datalist id="pool">
+                                                {% for vs in tags.vs %}
+                                                        <option>{{ vs }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        pool: <select type="text" name="pool[]" list="pool" data-live-search="true" multiple>
+                                        <datalist id="pool">
+                                                {% for pool in tags.pool %}
+                                                        <option>{{ pool }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        node: <select type="text" name="node[]" list="node" data-live-search="true" multiple>
+                                        <datalist id="node">
+                                                {% for node in tags.node %}
+                                                        <option>{{ node }}</option>
+                                                {% endfor %}
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px;">
+                                        gtmMonitorType: <select type="text" name="gtmMonitorType[]" list="gtmMonitorType" data-live-search="true" multiple>
+                                        <datalist id="gtmMonitorType">
+                                        	<option>http</option>
+						<option>https</option>
+						<option>tcp</option>
+						<option>ping</option>
+                                        </datalist>
+                                        </select>
+                                        </div>
+
+					<div align="left" style="float:left; margin-left:10px; margin-top:7px;">
+                                        <input type="checkbox" id="alarm" name="alarm" value="True">
+                                        <label for="alarm">alarm</label>
+                                        </input>
+                                        </div>
+
+                                        <div align="left" style="float:left; margin-left:10px; margin-top:4px;">
+                                        <input type="submit" value="Query">
+                                        </input>
+                                        </div>
+
+					<div style="float:left; margin-left:300px; margin-top:15px;">
+                                        	{{ tags.now }}
+                                	</div>
+				</div>
+			</form>
+                </div>
+
+	<script>
+                $(function () {
+                        $('select').selectpicker();
+                });
+        </script>
+
+	<div id="WRAPPER">
+		<table border="1" class="display" id="all" cell-spacing="0">
+			<thead>
+				<tr>
+					<!--<th class="selector"></th>--!>
+					<th class="domain">domain</th>
+					<th class="jkb">jkb</th>
+					<th class="dns">dns</th>
+					<th class="nameServer">nameServer</th>
+					<th class="record">record</th>
+					<th class="gtm/origin">gtm/origin</th>
+					<th class="updateTime">updateTime</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for data in datas %}
+				<tr>
+					<!--<td></td>--!>
+					<td>
+						<table border="1" id='{{data.domain}}'>
+							<tr>
+								<td colspan="2">{{ data.domain }}</td>
+							<tr>
+							<tr>
+								<td width="5%">dept.</td>
+								<td>
+									{% for each in  data.department %}
+									<button disabled>{{ each }}</button>
+									{% endfor %}
+								</td>
+							</tr>
+							<tr>
+								<td width="5%">srv</td>
+								<td>
+                                                                        {% for each in  data.service %}
+									<button disabled>{{ each }}</button>
+                                                                        {% endfor %}
+                                                                </td>
+							</tr>
+							<tr>
+                                                                <td width="5%">env</td>
+                                                                <td>
+                                                                        {% for each in  data.env %}
+									<button disabled>{{ each }}</button>
+                                                                        {% endfor %}
+                                                                </td>
+                                                        </tr>
+						</table>
+						<div style="float:right" onclick="openFun(event, '{{data.domain}}', {{ data.department }}, {{ data.service }}, {{ data.env }})">
+                                                	<button class="open-button" style="font-size:14px">
+                	                                        <i class="fa fa-edit"></i>
+                                                        </button>
+                                              	</div>
+					</td>
+					<td>
+						{% if data.jkb %}
+						<table border="1" width="100%">
+							<tr>
+								<td>
+									{% if data.jkb.health == "ok" %}
+									<div class="led-green"></div>
+									{% endif %}
+									{% if data.jkb.health == "fail" %}
+									<div class="led-red"></div>
+									{% endif %}
+									{% if data.jkb.health == "standby" %}
+									<div class="led-grey"></div>
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<details>
+										<summary>url</summary>
+                                                                                {{ data.jkb.url }}
+                                                                        </details>
+								</td>
+							</tr>
+							{% if data.jkb.health == "fail" %}
+							<tr>
+								<td colspan="2">
+									<details>
+										<summary>alart detail</summary>
+										{{ data.jkb.detail }}
+									</details>
+								</td>
+							</tr>
+							{% endif %}
+
+						</table>
+						{% endif %}
+					</td>
+		<td>{{ data.dns }}</td>
+		<td>{{ data.nameServer }}</td>
+		<td>{{ data.record }}</td>
+		<td>
+			{% if data.gtm %}
+			<table border="1" width="100%">
+				<tr>
+					<th width="30%">cname</th>
+					<th width="10%">cdn</th>
+					<th width="20%">origin</th>
+					<th width="5%">port</th>
+					{% for each in data.gtm|slice:":1" %}
+					{% if each.gslb %}
+					<th>gslb ip</th>
+					{% endif %}
+					{% endfor %}
+					{% for each in data.gtm|slice:":1" %}
+                                        {% if not each.gslb %}
+                                        <th>vs</th>
+                                        {% endif %}
+                                        {% endfor %}
+				</tr>
+				{% for each in data.gtm %}
+				<tr>
+					<td width="50%">{{ each.cname }}</td>
+					<td>{{ each.cdn }}</td>
+					<td>{{ each.origin }}</td>
+					<td>{{ each.port }}</td>
+					{% if each.gslb %}
+					<td>
+						{% for ip in each.gslb %}
+						<table border="1">
+							<tr>
+								<td>{{ ip.ip }}</td>
+								<td>{{ ip.port }}</td>
+								<td>
+									{% if ip.health == "ok" %}
+									<div class="led-green"></div>
+									{% endif %}
+									{% if ip.health == "fail" %}
+									<div class="led-red"></div>
+									{% endif %}
+								</td>
+								<td>
+									<table border="1">
+										<tr>
+											<td rowspan="5">
+												{% if ip.vs.health == "ok" %}
+												<div class="led-green"></div>
+												{% endif %}
+												{% if ip.vs.health == "alarm" %}
+												<div class="led-yellow"></div>
+												{% endif %}
+												{% if ip.vs.health == "fail" %}
+												<div class="led-red"></div>
+												{% endif %}
+												{% if ip.vs.health == "standby" %}
+												<div class="led-grey"></div>
+												{% endif %}
+											</td>
+										</tr>
+										<tr><td>{{ ip.vs.name }}</td></tr>
+										<tr><td>{{ ip.vs.pool }}</td></tr>
+                                                                                <tr><td>{{ ip.vs.mode }}</td></tr>
+										<tr>
+											<td>
+											<details>
+												<table border="1">
+													<summary>node</summary>
+													{% for each in ip.vs.node %}
+													<tr>
+														<td>{{ each.ip }}</td>
+														<td>
+															{% if each.health == "ok" %}
+															<div class="led-green"></div>
+															{% endif %}
+															{% if each.health == "fail" %}
+															<div class="led-red"></div>
+															{% endif %}
+															{% if each.health == "standby" %}
+                                                                                                                        <div class="led-grey"></div>
+                                                                                                                        {% endif %}
+														</td>
+													</tr>
+													{% endfor %}
+												</table>
+											</details>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+					</td>
+					{% if ip.health == "fail" %}
+				<tr>
+					<td colspan="5">
+						<details>
+							{{ ip.detail }}
+						</details>
+					</td>
+				</tr>
+				{% endif %}
+				</tr>
+			</table>
+			{% endfor %}
+		</td>
+		{% else %}
+		<td>
+			<table border="1">
+				<tr>
+					<td rowspan="5">
+						{% if each.vs.health == "ok" %}
+						<div class="led-green"></div>
+						{% endif %}
+						{% if each.vs.health == "alarm" %}
+						<div class="led-yellow"></div>
+						{% endif %}
+						{% if each.vs.health == "fail" %}
+						<div class="led-red"></div>
+						{% endif %}
+						{% if each.vs.health == "standby" %}
+						<div class="led-grey"></div>
+						{% endif %}
+					</td>
+				</tr>
+				<tr><td>{{ each.vs.name }}</td></tr>
+				<tr><td>{{ each.vs.pool }}</td></tr>
+                                <tr><td>{{ each.vs.mode }}</td></tr>
+				<tr>
+					<td>
+						<details>
+							<summary>node</summary>
+							<table border="1">
+								{% for ea in each.vs.node %}
+								<tr>
+									<td>{{ ea.ip }}</td>
+									<td>
+										{% if ea.health == "ok" %}
+										<div class="led-green"></div>
+										{% endif %}
+										{% if ea.health == "fail" %}
+										<div class="led-red"></div>
+										{% endif %}
+										{% if ea.health == "standby" %}
+                                                                                <div class="led-grey"></div>
+                                                                                {% endif %}
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</details>
+					</td>
+				</tr>
+			</table>
+		<td>
+			{% endif %}
+			</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="6">
+					<details>
+
+						{% for each in data.gtmDetail %}
+						<table border="1" width="auto">
+							<tr>
+								<td width="40%">策略線路:{{ each.view }}</td>
+								<td width="30%">策略狀態:{{ each.status }}</td>
+								<td width="30%">監控方式:{{ each.monitorType }}</td>
+							</tr>
+							<tr>
+								<th>資源</th>
+								<th>權重(%)</th>
+								<th style="text-align: center;">狀態</th>
+							</tr>
+							{% for resource in each.resource %}
+							<tr>
+								<td>{{ resource.value }}</td>
+								<td>{{ resource.ratio }}</td>
+								<td>
+									{% if resource.health == "ok" %}
+									<div class="led-green"></div>
+									{% endif %}
+									{% if resource.health == "fail" %}
+									<div class="led-red"></div>
+									{% endif %}
+									{% if resource.health == "standby" %}
+									<div class="led-grey"></div>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+						{% endfor %}
+					</details>
+				</td>
+			</tr>
+			</table>
+			{% endif %}
+
+			{% if data.origin %}
+			<table border="1" width="100%">
+				<tr>
+					<th>cdn</th>
+					<th>origin</th>
+					<th>port</th>
+					{% if data.gslb %}
+					<th>gslb ip</th>
+					{% endif %}
+					{% if not data.gslb %}
+					<th>vs</th>
+					{% endif %}
+				</tr>
+				<tr>
+					<td width="20%">{{ data.origin.cdn }}</td>
+					<td width="50%">{{ data.origin.origin }}</td>
+					<td width="5%">{{ data.origin.port }}</td>
+					{% if data.gslb %}
+					<td>
+						<table border="1">
+							{% for ip in data.gslb %}
+							<tr>
+								<td>{{ ip.ip }}</td>
+								<td>{{ ip.port }}</td>
+								<td>
+									{% if ip.health == "ok" %}
+									<div class="led-green"></div>
+									{% endif %}
+									{% if ip.health == "fail" %}
+									<div class="led-red"></div>
+									{% endif %}
+								</td>
+								<td>
+									<table border="1">
+										<tr>
+											<td rowspan="5">
+                                                                				{% if ip.vs.health == "ok" %}
+                                                                       				<div class="led-green"></div>
+                                                                        			{% endif %}
+                                                                        			{% if ip.vs.health == "alarm" %}
+                                                                        			<div class="led-yellow"></div>
+                                                                        			{% endif %}
+                                                                        			{% if ip.vs.health == "fail" %}
+                                                                        			<div class="led-red"></div>
+                                                                        			{% endif %}
+                                                                        			{% if ip.vs.health == "standby" %}
+                                                                        			<div class="led-grey"></div>
+                                                                        			{% endif %}
+                                                                			</td>
+										</tr>
+										<tr><td>{{ ip.vs.name }}</td></tr>
+										<tr><td>{{ ip.vs.pool }}</td></tr>
+                                                                                <tr><td>{{ ip.vs.mode }}</td></tr>
+										<tr>
+											<td>
+                                                                        			<details>
+                                                                                			<summary>node</summary>
+                                                                                			<table border="1">
+                                                                                        		{% for each in ip.vs.node %}
+                                                                                       			<tr>
+                                                                                                		<td>{{ each.ip }}</td>
+                                                                                                		<td>
+                                                                                                        		{% if each.health == "ok" %}
+                                                                                                        		<div class="led-green"></div>
+                                                                                                        		{% endif %}
+                                                                                                        		{% if each.health == "fail" %}
+                                                                                                        		<div class="led-red"></div>
+                                                                                                        		{% endif %}
+															{% if each.health == "standby" %}
+                                                                                                                        <div class="led-grey"></div>
+                                                                                                                        {% endif %}
+                                                                                                		</td>
+                                                                                        		</tr>
+                                                                                        		{% endfor %}
+                                                                                			</table>
+                                                                        			</details>
+                                                                			</td>
+										</tr>
+									</table>
+								</td>
+								{% if ip.health == "fail" %}
+								<tr>
+									<td colspan="4">
+										<details>
+											{{ ip.detail }}
+										</details>	
+									</td>
+								</tr>
+								{% endif %}
+							</tr>
+							{% endfor %}
+						</table>
+					</td>
+					{% endif %}
+					{% if not data.gslb %}
+					<td>
+						<table border="1">
+							<tr>
+								<td rowspan="5">
+									{% if data.origin.vs.health == "ok" %}
+									<div class="led-green"></div>
+									{% endif %}
+									{% if data.origin.vs.health == "alarm" %}
+									<div class="led-yellow"></div>
+									{% endif %}
+									{% if data.origin.vs.health == "fail" %}
+									<div class="led-red"></div>
+									{% endif %}
+									{% if data.origin.vs.health == "standby" %}
+									<div class="led-grey"></div>
+									{% endif %}
+								</td>
+							</tr>
+							<tr><td>{{ data.origin.vs.name }}</td></tr>
+							<tr><td>{{ data.origin.vs.pool }}</td></tr>
+							<tr><td>{{ data.origin.vs.mode }}</td></tr>
+							<tr>
+								<td>
+									<details>
+										<summary>node</summary>
+										<table border="1">
+											{% for each in data.origin.vs.node %}
+											<tr>
+												<td>{{ each.ip }}</td>
+												<td>
+													{% if each.health == "ok" %}
+													<div class="led-green"></div>
+													{% endif %}
+													{% if each.health == "fail" %}
+													<div class="led-red"></div>
+													{% endif %}
+													{% if each.health == "standby" %}
+                                                                                                        <div class="led-grey"></div>
+                                                                                                        {% endif %}
+												</td>
+											</tr>
+											{% endfor %}
+										</table>
+									</details>
+								</td>
+							</tr>
+						</table>
+					</td>
+					{% endif %}
+				</tr>
+			</table>
+		{% endif %}
+		</td>
+		<td>{{ data.updateTime }}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>

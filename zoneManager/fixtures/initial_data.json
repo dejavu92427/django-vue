@@ -1,0 +1,95 @@
+[
+  {
+    "model": "zoneManager.tag",
+    "pk": 1,
+    "fields": {
+      "text": "備援",
+      "type": "service"
+    }
+  },
+  {
+    "model": "zoneManager.tag",
+    "pk": 2,
+    "fields": {
+      "text": "泛域名",
+      "type": "service"
+    }
+  },
+  {
+    "model": "zoneManager.tag",
+    "pk": 3,
+    "fields": {
+      "text": "RD3",
+      "type": "department"
+    }
+  },
+  {
+    "model": "zoneManager.tag",
+    "pk": 4,
+    "fields": {
+      "text": "GCP",
+      "type": "env"
+    }
+  },
+  {
+    "model": "zoneManager.tag",
+    "pk": 5,
+    "fields": {
+      "text": "CQ9",
+      "type": "department"
+    }
+  },
+  {
+    "model": "zoneManager.domain",
+    "pk": 1,
+    "fields": {
+      "domain": "*.dulingfengsao.com",
+      "dns": "cloudflareDNS",
+      "record": "lobby.dulingfengsao.com.cdngtm.com",
+      "gslb_health": null,
+      "gtm_health": "fail",
+      "vs_health": null,
+      "update_time": "2023-03-11T15:10:02.407"
+    }
+  },
+  {
+    "model": "zoneManager.domaintag",
+    "pk": 1,
+    "fields": {
+      "domainId": 1,
+      "tagId": 1
+    }
+  },
+  {
+    "model": "zoneManager.domaintag",
+    "pk": 2,
+    "fields": {
+      "domainId": 1,
+      "tagId": 2
+    }
+  },
+  {
+    "model": "zoneManager.domaintag",
+    "pk": 3,
+    "fields": {
+      "domainId": 1,
+      "tagId": 3
+    }
+  },
+  {
+    "model": "zoneManager.domaintag",
+    "pk": 4,
+    "fields": {
+      "domainId": 1,
+      "tagId": 4
+    }
+  },
+  {
+    "model": "zoneManager.domaintag",
+    "pk": 5,
+    "fields": {
+      "domainId": 1,
+      "tagId": 5
+    }
+  }
+]

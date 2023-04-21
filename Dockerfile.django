@@ -1,0 +1,17 @@
+FROM python
+
+# 下載並且安裝 wait-for-it.sh 腳本
+RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
+    && chmod +x wait-for-it.sh \
+    && mv wait-for-it.sh /usr/local/bin/
+
+ENV PYTHON ENV
+
+RUN mkdir /dragon-app
+WORKDIR /dragon-app
+
+COPY ./django .
+
+
+
+RUN pip install -r ./requirements.txt

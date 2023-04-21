@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+
+  service-mysql:
+    image: mysql
+    container_name: container-mysql
+    restart: always
+    hostname: mysql
+    # command: --default-authentication-plugin=mysql_native_password --mysqlx=0
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: '0000'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db:/var/lib/mysql
+
+  service-django:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    container_name: container-django
+    volumes:
+      - ./django:/dragon-app
+    environment:
+      DJANGO_SUPERUSER_PASSWORD: 'root'
+    command: sh -c "wait-for-it.sh service-mysql:3306 -t 30 -- echo 'MySQL is up!' &&
+            python manage.py runserver 0.0.0.0:8000"
+            # python manage.py makemigrations && python manage.py migrate &&
+            # python manage.py createsuperuser --username=root --email=email@email.com --no-input || true &&
+
+# https://docs.djangoproject.com/en/4.1/ref/django-admin/#runserver
+# 預設情況下，runserver 命令會在 127.0.0.1 上啟動，這意味著只有在容器內部可以訪問該應用程式。這是出於安全性考慮，因為預設情況下，Django 應用程式只應該在受信任的網路上運行。
+# 對於 Node.js 伺服器來說，預設情況下可以在 0.0.0.0 這個 IP 位址上監聽，這樣該伺服器就可以在所有可用的網路介面上監聽，包括容器內部和主機上的介面，從而允許容器外部的主機能夠訪問該伺服器。
+    depends_on:
+      - service-mysql 
+    ports:
+      - '8000:8000'
+

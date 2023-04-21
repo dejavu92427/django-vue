@@ -1,0 +1,17 @@
+[
+        {
+            "action": ["getData", "getOrphanData", "getIcpData", "verify", "refresh"],
+            "principal": ["authenticated"],
+            "effect": "allow"
+        },
+        {
+            "action": ["getLogData", "icpDescription"],
+            "principal": ["staff"],
+            "effect": "allow"
+        },
+        {
+            "action": ["modifyTag", "cdnWhitelist", "whitelistCsv", "certPurchase"],
+            "principal": ["group:NOC", "staff"],
+            "effect": "allow"
+        }
+]

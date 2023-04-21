@@ -1,0 +1,6 @@
+**/nohup.out
+__pycache__
+#credentials.json
+config.ini
+.DS_Store
+/db
